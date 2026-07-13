@@ -621,7 +621,7 @@ function Step2({ form, onChange, onNext, onPrev }) {
                 }}
                 onChange={() => {}}
               />
-              <Box sx={{ flex: 1, textAlign: isRtl ? "right" : "left" }}>
+              <Box sx={{ flex: 1, textAlign: 'start' }}>
                 <Typography sx={S.installmentMonths}>
                   {months} {ci.months}
                 </Typography>
