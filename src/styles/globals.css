@@ -1,0 +1,113 @@
+@font-face {
+  font-family: "Fontfabric Nexa";
+  src: url("/fonts/Fontfabric-Nexa-Light.otf") format("opentype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fontfabric Nexa";
+  src: url("/fonts/Fontfabric-Nexa-Regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fontfabric Nexa";
+  src: url("/fonts/Fontfabric-Nexa-Heavy.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fontfabric Nexa";
+  src: url("/fonts/Fontfabric-Nexa-Black.otf") format("opentype");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GE SS Two";
+  src: url("/fonts/GE-SS-Two-Light.otf") format("opentype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GE SS Two";
+  src: url("/fonts/GE-SS-Two-Medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GE SS Two";
+  src: url("/fonts/GE-SS-Two-Medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GE SS Two";
+  src: url("/fonts/GE-SS-Two-Medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GE SS Two";
+  src: url("/fonts/GE_SS_Two_Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GE SS Two";
+  src: url("/fonts/GE_SS_Two_Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GE SS Two";
+  src: url("/fonts/GE_SS_Two_Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+:root {
+  --font-arabic: "GE SS Two", Arial, sans-serif;
+  --font-english: "Fontfabric Nexa", Arial, sans-serif;
+}
+
+html[lang="ar"],
+html[lang="ar"] body,
+html[dir="rtl"],
+html[dir="rtl"] body {
+  font-family: var(--font-arabic);
+}
+
+html[lang="en"],
+html[lang="en"] body,
+html[dir="ltr"],
+html[dir="ltr"] body {
+  font-family: var(--font-english);
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}

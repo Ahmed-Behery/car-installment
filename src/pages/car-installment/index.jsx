@@ -96,12 +96,12 @@ function CISelect({ value, onChange, placeholder, options, name, disabled }) {
       inputProps={{ sx: { py: "10.5px" } }}
     >
       <MenuItem value="" disabled>
-        <Typography sx={{ color: "#aaa", fontSize: "14px" }}>
+        <Typography sx={{ color: "#aaa", fontSize: "14px", textAlign: 'start' }}>
           {placeholder}
         </Typography>
       </MenuItem>
       {options.map((opt) => (
-        <MenuItem key={opt.value ?? opt} value={opt.value ?? opt}>
+        <MenuItem sx={{ textAlign: 'start' }} key={opt.value ?? opt} value={opt.value ?? opt}>
           {opt.label ?? opt}
         </MenuItem>
       ))}
