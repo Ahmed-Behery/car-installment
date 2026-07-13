@@ -121,15 +121,15 @@ export default function BranchModal({ open, onClose, onSelect }) {
             {ci.branch_no_results}
           </Typography>
         ) : (
-          <List sx={{ py: 0, maxHeight: 380, overflow: "auto" }}>
+          <List sx={{ py: 0, maxHeight: 380, overflow: "auto","& *": {direction: locale !== "en" ? "rtl" : "ltr"} }}>
             {filtered.map((branch) => (
-              <ListItem key={branch.id} disablePadding divider>
+              <ListItem key={branch.id} disablePadding divider sx={{direction: locale !== "en" ? "rtl" : "ltr"}}>
                 <ListItemButton
                   onClick={() => {
                     onSelect(branch);
                     onClose();
                   }}
-                  sx={{ py: 1.5, px: 2, "&:hover": { bgcolor: "#FFF8F2" } }}
+                  sx={{ py: 1.5, px: 2, "&:hover": { bgcolor: NAVY, direction: locale !== "en" ? "rtl" : "ltr" }, "&:hover p":{color: "#FFF"} }}
                 >
                   <LocationOnOutlinedIcon
                     sx={{
@@ -140,12 +140,12 @@ export default function BranchModal({ open, onClose, onSelect }) {
                       flexShrink: 0,
                     }}
                   />
-                  <Box sx={{ textAlign: isRtl ? "right" : "left" }}>
-                    <Typography sx={{ fontWeight: 600, fontSize: "14px", color: NAVY }}>
+                  <Box sx={{ textAlign: 'start' }}>
+                    <Typography sx={{ fontWeight: 600, fontSize: "14px", color: NAVY, marginInlineStart: 0.3 }}>
                       {branch.title}
                     </Typography>
                     {branch.address && (
-                      <Typography sx={{ fontSize: "12px", color: "#777", mt: 0.2 }}>
+                      <Typography sx={{ fontSize: "12px", color: "#777", mt: 0.2, marginInlineStart: 0.3 }}>
                         {branch.address}
                       </Typography>
                     )}

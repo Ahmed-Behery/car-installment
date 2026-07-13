@@ -95,7 +95,7 @@ export const ciStyles = {
     cursor: "pointer",
     bgcolor: colors.white,
     minHeight: { xs: "140px", md: "160px" },
-    width: "100%",
+    // width: "100%",
     "&:hover": { bgcolor: "#FAFAFA", borderColor: "#bbb" },
     transition: "background-color 0.2s, border-color 0.2s",
   },

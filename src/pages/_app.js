@@ -81,7 +81,7 @@ export default function App({ Component, pageProps }) {
                 MenuListProps: {
                   dir: direction,
                   sx: {
-                    direction,
+                    // direction,
                     textAlign: "start",
                     fontFamily: appFontFamily,
                   },

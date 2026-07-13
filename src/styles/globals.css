@@ -111,3 +111,6 @@ textarea,
 select {
   font-family: inherit;
 }
+.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root{
+  text-align: start !important;
+}

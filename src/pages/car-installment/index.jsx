@@ -90,18 +90,18 @@ function CISelect({ value, onChange, placeholder, options, name, disabled }) {
       disabled={disabled}
       sx={{
         ...S.selectField,
-        "& .MuiSelect-select": { textAlign: isRtl ? "right" : "left" },
+        "& .MuiSelect-select": { textAlign: 'start' },
       }}
       size="small"
       inputProps={{ sx: { py: "10.5px" } }}
     >
       <MenuItem value="" disabled>
-        <Typography sx={{ color: "#aaa", fontSize: "14px", textAlign: 'start' }}>
+        <Typography sx={{ color: "#aaa", fontSize: "14px", textAlign: 'start !important' }}>
           {placeholder}
         </Typography>
       </MenuItem>
       {options.map((opt) => (
-        <MenuItem sx={{ textAlign: 'start' }} key={opt.value ?? opt} value={opt.value ?? opt}>
+        <MenuItem sx={{ textAlign: 'start !important' }} key={opt.value ?? opt} value={opt.value ?? opt}>
           {opt.label ?? opt}
         </MenuItem>
       ))}
@@ -141,7 +141,7 @@ function UploadBox({
           <Box
             sx={{
               position: "relative",
-              width: "100%",
+              // width: "100%",
               height: { xs: 70, md: 90 },
               mt: 1,
             }}
@@ -548,12 +548,12 @@ function Step2({ form, onChange, onNext, onPrev }) {
           mb: 1,
         }}
       >
-        <Box>
-          <FieldLabel>{ci.down_payment}</FieldLabel>
+         <Box>
+          <FieldLabel>{ci.car_price}</FieldLabel>
           <TextField
-            value={form.downPayment}
+            value={form.carPrice}
             onChange={onChange}
-            name="downPayment"
+            name="carPrice"
             placeholder="0"
             size="small"
             type="number"
@@ -565,11 +565,11 @@ function Step2({ form, onChange, onNext, onPrev }) {
           />
         </Box>
         <Box>
-          <FieldLabel>{ci.car_price}</FieldLabel>
+          <FieldLabel>{ci.down_payment}</FieldLabel>
           <TextField
-            value={form.carPrice}
+            value={form.downPayment}
             onChange={onChange}
-            name="carPrice"
+            name="downPayment"
             placeholder="0"
             size="small"
             type="number"
@@ -604,7 +604,7 @@ function Step2({ form, onChange, onNext, onPrev }) {
                 )
               : 3525;
 
-          return (
+          return  form.carPrice && form.downPayment && (
             <Box
               key={months}
               sx={S.installmentCard(selected)}
