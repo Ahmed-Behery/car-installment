@@ -1,11 +1,20 @@
 /** @type {import('next').NextConfig} */
+
+const isGitHubActions = process.env.GITHUB_ACTIONS === "true";
+const basePath = isGitHubActions ? "/car-installment" : "";
+
 const nextConfig = {
   reactStrictMode: true,
-  i18n: {
-    locales: ["ar", "en"],
-    defaultLocale: "ar",
-  },
+
+  output: "export",
+  trailingSlash: true,
+
+  basePath,
+  assetPrefix: basePath,
+
   images: {
+    unoptimized: true,
+
     remotePatterns: [
       {
         protocol: "https",
