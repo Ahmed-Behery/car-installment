@@ -19,16 +19,21 @@ import { cifEg } from "@coreui/icons";
 import { toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const CAR_IMG = "https://contact-app-prod.s3.us-east-2.amazonaws.com/contact.eg/cars-cover-small.webp";
+const CAR_IMG =
+  "https://contact-app-prod.s3.us-east-2.amazonaws.com/contact.eg/cars-cover-small.webp";
 
 // Google's public test site key — always verifies successfully, safe for
 // demos. Set NEXT_PUBLIC_RECAPTCHA_SITE_KEY to your own key for production.
 const RECAPTCHA_SITE_KEY =
-  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
+  "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
-const CIcon = dynamic(() => import("@coreui/icons-react").then((m) => m.default), {
-  ssr: false,
-});
+const CIcon = dynamic(
+  () => import("@coreui/icons-react").then((m) => m.default),
+  {
+    ssr: false,
+  },
+);
 
 import { useI18n } from "@/i18n/I18nProvider";
 import { api } from "@/utils/api";
@@ -91,7 +96,9 @@ function CISelect({ value, onChange, placeholder, options, name, disabled }) {
       inputProps={{ sx: { py: "10.5px" } }}
     >
       <MenuItem value="" disabled>
-        <Typography sx={{ color: "#aaa", fontSize: "14px" }}>{placeholder}</Typography>
+        <Typography sx={{ color: "#aaa", fontSize: "14px" }}>
+          {placeholder}
+        </Typography>
       </MenuItem>
       {options.map((opt) => (
         <MenuItem key={opt.value ?? opt} value={opt.value ?? opt}>
@@ -103,7 +110,14 @@ function CISelect({ value, onChange, placeholder, options, name, disabled }) {
 }
 
 /* ─── ID Upload Box ─── */
-function UploadBox({ label, hint, preview, onFileChange, chooseLabel, changeLabel }) {
+function UploadBox({
+  label,
+  hint,
+  preview,
+  onFileChange,
+  chooseLabel,
+  changeLabel,
+}) {
   const inputRef = useRef();
 
   return (
@@ -124,7 +138,14 @@ function UploadBox({ label, hint, preview, onFileChange, chooseLabel, changeLabe
       <Typography sx={S.uploadBoxLabel}>{label}</Typography>
       {preview ? (
         <>
-          <Box sx={{ position: "relative", width: "100%", height: { xs: 70, md: 90 }, mt: 1 }}>
+          <Box
+            sx={{
+              position: "relative",
+              width: "100%",
+              height: { xs: 70, md: 90 },
+              mt: 1,
+            }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={preview}
@@ -134,18 +155,26 @@ function UploadBox({ label, hint, preview, onFileChange, chooseLabel, changeLabe
           </Box>
           <Typography
             sx={S.changeImageLink}
-            onClick={(e) => { e.stopPropagation(); inputRef.current?.click(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              inputRef.current?.click();
+            }}
           >
             {changeLabel}
           </Typography>
         </>
       ) : (
         <>
-          <UploadFileOutlinedIcon sx={{ fontSize: { xs: 32, md: 40 }, color: "#C0C0C0", my: 0.75 }} />
+          <UploadFileOutlinedIcon
+            sx={{ fontSize: { xs: 32, md: 40 }, color: "#C0C0C0", my: 0.75 }}
+          />
           <Typography sx={S.uploadBoxHint}>{hint}</Typography>
           <Typography
             sx={S.chooseImageLink}
-            onClick={(e) => { e.stopPropagation(); inputRef.current?.click(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              inputRef.current?.click();
+            }}
           >
             {chooseLabel}
           </Typography>
@@ -287,7 +316,13 @@ function Step1({
         }}
       >
         {/* Nearest Branch */}
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 0.5,
+          }}
+        >
           <FieldLabel>{ci.nearest_branch}</FieldLabel>
           <Typography sx={S.branchSubtitle}>{ci.branch_subtitle}</Typography>
           {form.selectedBranch ? (
@@ -296,18 +331,22 @@ function Step1({
                 {ci.change_branch}
               </Button>
               <Box sx={S.branchInfo}>
-                <Typography sx={S.branchName}>{form.selectedBranch.title}</Typography>
+                <Typography sx={S.branchName}>
+                  {form.selectedBranch.title}
+                </Typography>
                 {form.selectedBranch.address && (
-                  <Typography sx={S.branchAddress}>{form.selectedBranch.address}</Typography>
+                  <Typography sx={S.branchAddress}>
+                    {form.selectedBranch.address}
+                  </Typography>
                 )}
               </Box>
             </Box>
           ) : (
             <Box sx={S.branchSelectBox} onClick={onOpenBranchModal}>
-              <KeyboardArrowDownIcon sx={{ color: "#aaa", fontSize: 20 }} />
               <Typography sx={{ color: "#aaa", fontSize: "14px" }}>
                 {ci.select_branch}
               </Typography>
+              <KeyboardArrowDownIcon sx={{ color: "#aaa", fontSize: 20 }} />
             </Box>
           )}
         </Box>
@@ -315,7 +354,13 @@ function Step1({
         {/* Mobile */}
         <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
           <FieldLabel>{ci.mobile_number}</FieldLabel>
-          <FieldLabel sx={{ mt: 0.5, fontSize: "12px !important", color: "#888 !important" }}>
+          <FieldLabel
+            sx={{
+              mt: 0.5,
+              fontSize: "12px !important",
+              color: "#888 !important",
+            }}
+          >
             {ci.phone_number}
           </FieldLabel>
           <Box sx={S.phoneInputWrapper}>
@@ -331,19 +376,37 @@ function Step1({
             />
             <Box sx={S.flagBox}>
               <CIcon icon={cifEg} style={{ width: "22px", flexShrink: 0 }} />
-              <Typography sx={{ fontSize: "12px", color: "#555" }}>▾</Typography>
+              <Typography sx={{ fontSize: "12px", color: "#555" }}>
+                ▾
+              </Typography>
             </Box>
           </Box>
 
           {/* Phone verification (OTP) */}
           <Box sx={{ mt: 1 }}>
             {form.otpVerified ? (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, color: "#2e7d32" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                  color: "#2e7d32",
+                }}
+              >
                 <CheckCircleOutlineIcon sx={{ fontSize: 18 }} />
-                <Typography sx={{ fontSize: "13px", fontWeight: "600" }}>{ci.verified}</Typography>
+                <Typography sx={{ fontSize: "13px", fontWeight: "600" }}>
+                  {ci.verified}
+                </Typography>
               </Box>
             ) : form.otpSent ? (
-              <Box sx={{ display: "flex", gap: 1, alignItems: "center", flexWrap: "wrap" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 1,
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
                 <TextField
                   value={form.otpCode}
                   onChange={onChange}
@@ -351,7 +414,10 @@ function Step1({
                   placeholder={ci.code_placeholder}
                   size="small"
                   sx={{ ...S.textField, maxWidth: "160px" }}
-                  inputProps={{ maxLength: 6, style: { textAlign: "center", letterSpacing: "2px" } }}
+                  inputProps={{
+                    maxLength: 6,
+                    style: { textAlign: "center", letterSpacing: "2px" },
+                  }}
                 />
                 <Button
                   size="small"
@@ -362,7 +428,12 @@ function Step1({
                   {isVerifyingOtp ? ci.otp_verifying : ci.verify_code}
                 </Button>
                 <Typography
-                  sx={{ fontSize: "12px", color: ORANGE, cursor: "pointer", textDecoration: "underline" }}
+                  sx={{
+                    fontSize: "12px",
+                    color: ORANGE,
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                  }}
                   onClick={onSendCode}
                 >
                   {ci.resend_code}
@@ -402,7 +473,9 @@ function Step1({
       {/* Consent */}
       <Box
         sx={S.consentRow}
-        onClick={() => onChange({ target: { name: "consent", value: !form.consent } })}
+        onClick={() =>
+          onChange({ target: { name: "consent", value: !form.consent } })
+        }
       >
         <Typography sx={S.consentText}>{ci.credit_inquiry_consent}</Typography>
         <Checkbox
@@ -413,7 +486,13 @@ function Step1({
       </Box>
 
       {/* reCAPTCHA */}
-      <Box sx={{ display: "flex", justifyContent: isRtl ? "flex-end" : "flex-start", my: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: isRtl ? "flex-end" : "flex-start",
+          my: 2,
+        }}
+      >
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey={RECAPTCHA_SITE_KEY}
@@ -432,9 +511,17 @@ function Step1({
           sx={S.primaryBtn}
           onClick={onSubmit}
           disabled={isSubmitting || !canSubmit}
-          startIcon={isSubmitting ? <CircularProgress size={16} sx={{ color: "#fff" }} /> : null}
+          startIcon={
+            isSubmitting ? (
+              <CircularProgress size={16} sx={{ color: "#fff" }} />
+            ) : null
+          }
         >
-          {isSubmitting ? ci.submitting : isLastStep ? ci.submit_request : ci.next}
+          {isSubmitting
+            ? ci.submitting
+            : isLastStep
+              ? ci.submit_request
+              : ci.next}
         </Button>
       </Box>
     </Box>
@@ -471,7 +558,10 @@ function Step2({ form, onChange, onNext, onPrev }) {
             size="small"
             type="number"
             sx={S.textField}
-            inputProps={{ min: 0, style: { textAlign: isRtl ? "right" : "left" } }}
+            inputProps={{
+              min: 0,
+              style: { textAlign: isRtl ? "right" : "left" },
+            }}
           />
         </Box>
         <Box>
@@ -484,14 +574,19 @@ function Step2({ form, onChange, onNext, onPrev }) {
             size="small"
             type="number"
             sx={S.textField}
-            inputProps={{ min: 0, style: { textAlign: isRtl ? "right" : "left" } }}
+            inputProps={{
+              min: 0,
+              style: { textAlign: isRtl ? "right" : "left" },
+            }}
           />
         </Box>
       </Box>
 
       {/* Info note */}
       <Box sx={S.infoNote}>
-        <InfoOutlinedIcon sx={{ color: ORANGE, fontSize: 18, mt: 0.1, flexShrink: 0 }} />
+        <InfoOutlinedIcon
+          sx={{ color: ORANGE, fontSize: 18, mt: 0.1, flexShrink: 0 }}
+        />
         <Typography sx={S.infoNoteText}>{ci.insurance_note}</Typography>
       </Box>
 
@@ -504,7 +599,9 @@ function Step2({ form, onChange, onNext, onPrev }) {
           const selected = form.selectedMonths === months;
           const monthly =
             form.carPrice && form.downPayment
-              ? Math.round((Number(form.carPrice) - Number(form.downPayment)) / months)
+              ? Math.round(
+                  (Number(form.carPrice) - Number(form.downPayment)) / months,
+                )
               : 3525;
 
           return (
@@ -517,7 +614,11 @@ function Step2({ form, onChange, onNext, onPrev }) {
             >
               <Radio
                 checked={selected}
-                sx={{ color: "#ccc", "&.Mui-checked": { color: ORANGE }, p: 0.5 }}
+                sx={{
+                  color: "#ccc",
+                  "&.Mui-checked": { color: ORANGE },
+                  p: 0.5,
+                }}
                 onChange={() => {}}
               />
               <Box sx={{ flex: 1, textAlign: isRtl ? "right" : "left" }}>
@@ -525,7 +626,7 @@ function Step2({ form, onChange, onNext, onPrev }) {
                   {months} {ci.months}
                 </Typography>
                 <Typography sx={S.installmentAmount}>
-                  {monthly.toLocaleString("ar-EG")} {ci.per_month}
+                  {monthly.toLocaleString("en-US")} {ci.per_month}
                 </Typography>
               </Box>
             </Box>
@@ -538,7 +639,11 @@ function Step2({ form, onChange, onNext, onPrev }) {
         <Button sx={S.secondaryBtn} onClick={onPrev}>
           {ci.previous}
         </Button>
-        <Button sx={S.primaryBtn} onClick={onNext} disabled={!form.selectedMonths}>
+        <Button
+          sx={S.primaryBtn}
+          onClick={onNext}
+          disabled={!form.selectedMonths}
+        >
           {ci.next}
         </Button>
       </Box>
@@ -589,7 +694,10 @@ function Step3({ form, onChange, onPrev, onSubmit, isFirstStep }) {
   const localize = (item) => item.name[locale] || item.name.ar;
   const brandOptions = brands.map((b) => ({ value: b.id, label: localize(b) }));
   const modelOptions = models.map((m) => ({ value: m.id, label: localize(m) }));
-  const categoryOptions = categories.map((c) => ({ value: c.id, label: localize(c) }));
+  const categoryOptions = categories.map((c) => ({
+    value: c.id,
+    label: localize(c),
+  }));
 
   const handleBrandChange = (e) => {
     onChange(e);
@@ -609,13 +717,17 @@ function Step3({ form, onChange, onPrev, onSubmit, isFirstStep }) {
       <Box sx={S.conditionBtnGroup}>
         <Button
           sx={S.conditionBtn(carCondition === "new")}
-          onClick={() => onChange({ target: { name: "carCondition", value: "new" } })}
+          onClick={() =>
+            onChange({ target: { name: "carCondition", value: "new" } })
+          }
         >
           {ci.new_car}
         </Button>
         <Button
           sx={S.conditionBtn(carCondition === "used")}
-          onClick={() => onChange({ target: { name: "carCondition", value: "used" } })}
+          onClick={() =>
+            onChange({ target: { name: "carCondition", value: "used" } })
+          }
         >
           {ci.used_car}
         </Button>
@@ -628,30 +740,48 @@ function Step3({ form, onChange, onPrev, onSubmit, isFirstStep }) {
       <Box sx={S.carDecisionGrid}>
         <Box
           sx={S.carDecisionCard(carDecided === true)}
-          onClick={() => onChange({ target: { name: "carDecided", value: true } })}
+          onClick={() =>
+            onChange({ target: { name: "carDecided", value: true } })
+          }
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={CAR_IMG}
             alt={ci.yes_label}
-            style={{ width: "100%", maxWidth: 130, height: "auto", objectFit: "contain" }}
+            style={{
+              width: "100%",
+              maxWidth: 130,
+              height: "auto",
+              objectFit: "contain",
+            }}
           />
           <Typography sx={S.carDecisionLabel}>{ci.yes_label}</Typography>
-          <Typography sx={S.carDecisionSub}>{ci.know_brand_subtitle}</Typography>
+          <Typography sx={S.carDecisionSub}>
+            {ci.know_brand_subtitle}
+          </Typography>
         </Box>
 
         <Box
           sx={S.carDecisionCard(carDecided === false)}
-          onClick={() => onChange({ target: { name: "carDecided", value: false } })}
+          onClick={() =>
+            onChange({ target: { name: "carDecided", value: false } })
+          }
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={CAR_IMG}
             alt={ci.no_label}
-            style={{ width: "100%", maxWidth: 130, height: "auto", objectFit: "contain" }}
+            style={{
+              width: "100%",
+              maxWidth: 130,
+              height: "auto",
+              objectFit: "contain",
+            }}
           />
           <Typography sx={S.carDecisionLabel}>{ci.no_label}</Typography>
-          <Typography sx={S.carDecisionSub}>{ci.not_decided_subtitle}</Typography>
+          <Typography sx={S.carDecisionSub}>
+            {ci.not_decided_subtitle}
+          </Typography>
         </Box>
       </Box>
 
@@ -705,7 +835,9 @@ function Step3({ form, onChange, onPrev, onSubmit, isFirstStep }) {
                 value={form.carCategory}
                 onChange={onChange}
                 name="carCategory"
-                placeholder={form.carModel ? ci.category : ci.select_model_first}
+                placeholder={
+                  form.carModel ? ci.category : ci.select_model_first
+                }
                 options={categoryOptions}
                 disabled={!form.carModel}
               />
@@ -784,7 +916,13 @@ export default function CarInstallmentPage() {
     const { name, value } = e.target;
     setForm((prev) => {
       if (name === "phone" && value !== prev.phone && prev.otpVerified) {
-        return { ...prev, [name]: value, otpSent: false, otpVerified: false, otpCode: "" };
+        return {
+          ...prev,
+          [name]: value,
+          otpSent: false,
+          otpVerified: false,
+          otpCode: "",
+        };
       }
       return { ...prev, [name]: value };
     });
@@ -801,10 +939,21 @@ export default function CarInstallmentPage() {
     setForm((prev) => ({ ...prev, selectedBranch: branch }));
   }, []);
 
-  const goNext = useCallback(() => setCurrentStep((s) => Math.min(s + 1, 3)), []);
-  const goPrev = useCallback(() => setCurrentStep((s) => Math.max(s - 1, 1)), []);
+  const goNext = useCallback(
+    () => setCurrentStep((s) => Math.min(s + 1, 3)),
+    [],
+  );
+  const goPrev = useCallback(
+    () => setCurrentStep((s) => Math.max(s - 1, 1)),
+    [],
+  );
 
-  const toastOpts = { position: "top-center", autoClose: 3000, hideProgressBar: true, theme: "colored" };
+  const toastOpts = {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    theme: "colored",
+  };
 
   const handleSendCode = useCallback(async () => {
     if (!form.phone) {
@@ -814,7 +963,12 @@ export default function CarInstallmentPage() {
     setIsSendingOtp(true);
     try {
       await api.post("/auth/send-otp", { phone: "+20" + form.phone });
-      setForm((prev) => ({ ...prev, otpSent: true, otpVerified: false, otpCode: "" }));
+      setForm((prev) => ({
+        ...prev,
+        otpSent: true,
+        otpVerified: false,
+        otpCode: "",
+      }));
       toast.success(ci.otp_sent_success, toastOpts);
     } catch {
       toast.error(ci.otp_sent_error, toastOpts);
