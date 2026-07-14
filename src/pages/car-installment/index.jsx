@@ -360,40 +360,143 @@ function Step1({
             </Box>
           )}
         </Box>
+        {/* Email */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 0.5,
+          }}
+        >
+          <FieldLabel>{ci.email}</FieldLabel>
+          <TextField
+            value={form.email}
+            onChange={onChange}
+            name="email"
+            type="email"
+            placeholder={ci.email}
+            size="small"
+            sx={S.textField}
+            inputProps={{ style: { textAlign: isRtl ? "right" : "left" } }}
+          />
 
-        {/* Mobile */}
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-          <FieldLabel>{ci.mobile_number}</FieldLabel>
-          <FieldLabel
-            sx={{
-              mt: 0.5,
-              fontSize: "12px !important",
-              color: "#888 !important",
-            }}
-          >
-            {ci.phone_number}
-          </FieldLabel>
-          <Box sx={S.phoneInputWrapper}>
-            <Box
-              component="input"
-              value={form.phone}
-              onChange={onChange}
-              name="phone"
-              type="tel"
-              placeholder="01X XXXX XXXX"
-              sx={S.phoneInputInner}
-              maxLength={11}
-            />
-            <Box sx={S.flagBox}>
-              <CIcon icon={cifEg} style={{ width: "22px", flexShrink: 0 }} />
-              <Typography sx={{ fontSize: "12px", color: "#555" }}>
-                ▾
-              </Typography>
-            </Box>
+          {/* Email verification (OTP) */}
+          <Box sx={{ mt: 1 }}>
+            {form.otpVerified ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                  color: "#2e7d32",
+                }}
+              >
+                <CheckCircleOutlineIcon sx={{ fontSize: 18 }} />
+                <Typography sx={{ fontSize: "13px", fontWeight: "600" }}>
+                  {ci.verified}
+                </Typography>
+              </Box>
+            ) : form.otpSent ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 1,
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <TextField
+                  value={form.otpCode}
+                  onChange={onChange}
+                  name="otpCode"
+                  placeholder={ci.code_placeholder}
+                  size="small"
+                  sx={{ ...S.textField, maxWidth: "160px" }}
+                  inputProps={{
+                    maxLength: 6,
+                    style: { textAlign: "center", letterSpacing: "2px" },
+                  }}
+                />
+
+                <Button
+                  size="small"
+                  onClick={onVerifyCode}
+                  disabled={isVerifyingOtp || !form.otpCode}
+                  sx={{ ...S.changeBtn, minWidth: "76px" }}
+                >
+                  {isVerifyingOtp ? ci.otp_verifying : ci.verify_code}
+                </Button>
+
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    color: ORANGE,
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                  }}
+                  onClick={onSendCode}
+                >
+                  {ci.resend_code}
+                </Typography>
+              </Box>
+            ) : (
+              <Button
+                size="small"
+                onClick={onSendCode}
+                disabled={isSendingOtp || !form.email}
+                sx={{ ...S.changeBtn, minWidth: "100px" }}
+              >
+                {isSendingOtp ? ci.otp_sending : ci.send_code}
+              </Button>
+            )}
           </Box>
+        </Box>
+      </Box>
 
-          {/* Phone verification (OTP) */}
-          {/* <Box sx={{ mt: 1 }}>
+      <Divider sx={S.sectionDivider} />
+
+      {/* Mobile */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 0.5,
+          mb: 2,
+          width: {
+            xs: "100%",
+            sm: "50%",
+          },
+        }}
+      >
+        <FieldLabel>{ci.mobile_number}</FieldLabel>
+        {/* <FieldLabel
+          sx={{
+            mt: 0.5,
+            fontSize: "12px !important",
+            color: "#888 !important",
+          }}
+        > , width:"50%"
+          {ci.phone_number}
+        </FieldLabel> */}
+        <Box sx={S.phoneInputWrapper}>
+          <Box
+            component="input"
+            value={form.phone}
+            onChange={onChange}
+            name="phone"
+            type="tel"
+            placeholder="01X XXXX XXXX"
+            sx={S.phoneInputInner}
+            maxLength={11}
+          />
+          <Box sx={S.flagBox}>
+            <CIcon icon={cifEg} style={{ width: "22px", flexShrink: 0 }} />
+            <Typography sx={{ fontSize: "12px", color: "#555" }}>▾</Typography>
+          </Box>
+        </Box>
+
+        {/* Phone verification (OTP) */}
+        {/* <Box sx={{ mt: 1 }}>
             {form.otpVerified ? (
               <Box
                 sx={{
@@ -460,112 +563,7 @@ function Step1({
               </Button>
             )}
           </Box> */}
-        </Box>
       </Box>
-
-      <Divider sx={S.sectionDivider} />
-
-      {/* Email */}
-      {/* <Box sx={{ mb: 2 }}>
-        <FieldLabel>{ci.email}</FieldLabel>
-        <TextField
-          value={form.email}
-          onChange={onChange}
-          name="email"
-          type="email"
-          placeholder={ci.email}
-          size="small"
-          sx={S.textField}
-          inputProps={{ style: { textAlign: isRtl ? "right" : "left" } }}
-        />
-      </Box> */}
-      {/* Email */}
-      <Box sx={{ mb: 2 }}>
-        <FieldLabel>{ci.email}</FieldLabel>
-
-        <TextField
-          value={form.email}
-          onChange={onChange}
-          name="email"
-          type="email"
-          placeholder={ci.email}
-          size="small"
-          sx={S.textField}
-          inputProps={{ style: { textAlign: isRtl ? "right" : "left" } }}
-        />
-
-        {/* Email verification (OTP) */}
-        <Box sx={{ mt: 1 }}>
-          {form.otpVerified ? (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 0.5,
-                color: "#2e7d32",
-              }}
-            >
-              <CheckCircleOutlineIcon sx={{ fontSize: 18 }} />
-              <Typography sx={{ fontSize: "13px", fontWeight: "600" }}>
-                {ci.verified}
-              </Typography>
-            </Box>
-          ) : form.otpSent ? (
-            <Box
-              sx={{
-                display: "flex",
-                gap: 1,
-                alignItems: "center",
-                flexWrap: "wrap",
-              }}
-            >
-              <TextField
-                value={form.otpCode}
-                onChange={onChange}
-                name="otpCode"
-                placeholder={ci.code_placeholder}
-                size="small"
-                sx={{ ...S.textField, maxWidth: "160px" }}
-                inputProps={{
-                  maxLength: 6,
-                  style: { textAlign: "center", letterSpacing: "2px" },
-                }}
-              />
-
-              <Button
-                size="small"
-                onClick={onVerifyCode}
-                disabled={isVerifyingOtp || !form.otpCode}
-                sx={{ ...S.changeBtn, minWidth: "76px" }}
-              >
-                {isVerifyingOtp ? ci.otp_verifying : ci.verify_code}
-              </Button>
-
-              <Typography
-                sx={{
-                  fontSize: "12px",
-                  color: ORANGE,
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                }}
-                onClick={onSendCode}
-              >
-                {ci.resend_code}
-              </Typography>
-            </Box>
-          ) : (
-            <Button
-              size="small"
-              onClick={onSendCode}
-              disabled={isSendingOtp || !form.email}
-              sx={{ ...S.changeBtn, minWidth: "100px" }}
-            >
-              {isSendingOtp ? ci.otp_sending : ci.send_code}
-            </Button>
-          )}
-        </Box>
-      </Box>
-
       {/* Consent */}
       <Box
         sx={S.consentRow}
