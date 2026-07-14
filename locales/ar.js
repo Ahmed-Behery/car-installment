@@ -53,7 +53,8 @@ export default {
     financing_section: "معلومات التمويل",
     down_payment: "المقدم",
     car_price: "سعر العربية",
-    insurance_note: "السعر التأميني في المبلغ قابل أن يرتفع على أساس السعر الرسمي",
+    insurance_note:
+      "السعر التأميني في المبلغ قابل أن يرتفع على أساس السعر الرسمي",
     choose_installment: "اختار القسط الشهري المناسب",
     months: "شهر",
     per_month: "ج.م / الشهر",
@@ -100,4 +101,5 @@ export default {
     select_model_first: "اختر الموديل أولاً",
     recaptcha_required: "يرجى تأكيد أنك لست روبوت",
   },
+  logo: "https://contact-app-prod.s3.us-east-2.amazonaws.com/contact.eg/logo-ar.png",
 };

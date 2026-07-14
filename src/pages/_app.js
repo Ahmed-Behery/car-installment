@@ -9,6 +9,7 @@ import "@/styles/globals.css";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { createEmotionCacheRtl } from "@/utils/createEmotionCache";
+import NavBar from "@/components/NavBar";
 
 // Only Arabic (RTL) needs a dedicated cache with the rtl stylis plugin.
 // English keeps emotion's own default cache untouched.
@@ -18,8 +19,8 @@ export default function App({ Component, pageProps }) {
   const { locale } = useRouter();
   const isRtl = locale !== "en";
   const appFontFamily = isRtl
-  ? '"GE SS Two", Arial, sans-serif'
-  : '"Fontfabric Nexa", Arial, sans-serif';
+    ? '"GE SS Two", Arial, sans-serif'
+    : '"Fontfabric Nexa", Arial, sans-serif';
 
   const direction = isRtl ? "rtl" : "ltr";
 
@@ -103,14 +104,14 @@ export default function App({ Component, pageProps }) {
           },
         },
       }),
-  [isRtl, appFontFamily]
+    [isRtl, appFontFamily],
   );
 
   const content = (
     <ThemeProvider theme={theme}>
       <I18nProvider>
         <Box id="app-root" dir={isRtl ? "rtl" : "ltr"}>
-          <LanguageSwitcher />
+          <NavBar />
           <Component {...pageProps} />
           <ToastContainer
             position="top-center"
@@ -125,5 +126,9 @@ export default function App({ Component, pageProps }) {
     </ThemeProvider>
   );
 
-  return isRtl ? <CacheProvider value={rtlCache}>{content}</CacheProvider> : content;
+  return isRtl ? (
+    <CacheProvider value={rtlCache}>{content}</CacheProvider>
+  ) : (
+    content
+  );
 }

@@ -53,7 +53,8 @@ export default {
     financing_section: "Financing Information",
     down_payment: "Down Payment",
     car_price: "Car Price",
-    insurance_note: "Insurance price in the amount may increase based on the official price",
+    insurance_note:
+      "Insurance price in the amount may increase based on the official price",
     choose_installment: "Choose the suitable monthly installment",
     months: "months",
     per_month: "EGP / month",
@@ -100,4 +101,5 @@ export default {
     select_model_first: "Select model first",
     recaptcha_required: "Please confirm you're not a robot",
   },
+  logo: "https://contact-app-prod.s3.us-east-2.amazonaws.com/contact.eg/logo-en.webp",
 };
