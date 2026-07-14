@@ -90,18 +90,28 @@ function CISelect({ value, onChange, placeholder, options, name, disabled }) {
       disabled={disabled}
       sx={{
         ...S.selectField,
-        "& .MuiSelect-select": { textAlign: 'start' },
+        "& .MuiSelect-select": { textAlign: "start" },
       }}
       size="small"
       inputProps={{ sx: { py: "10.5px" } }}
     >
       <MenuItem value="" disabled>
-        <Typography sx={{ color: "#aaa", fontSize: "14px", textAlign: 'start !important' }}>
+        <Typography
+          sx={{
+            color: "#aaa",
+            fontSize: "14px",
+            textAlign: "start !important",
+          }}
+        >
           {placeholder}
         </Typography>
       </MenuItem>
       {options.map((opt) => (
-        <MenuItem sx={{ textAlign: 'start !important' }} key={opt.value ?? opt} value={opt.value ?? opt}>
+        <MenuItem
+          sx={{ textAlign: "start !important" }}
+          key={opt.value ?? opt}
+          value={opt.value ?? opt}
+        >
           {opt.label ?? opt}
         </MenuItem>
       ))}
@@ -383,7 +393,7 @@ function Step1({
           </Box>
 
           {/* Phone verification (OTP) */}
-          <Box sx={{ mt: 1 }}>
+          {/* <Box sx={{ mt: 1 }}>
             {form.otpVerified ? (
               <Box
                 sx={{
@@ -449,14 +459,14 @@ function Step1({
                 {isSendingOtp ? ci.otp_sending : ci.send_code}
               </Button>
             )}
-          </Box>
+          </Box> */}
         </Box>
       </Box>
 
       <Divider sx={S.sectionDivider} />
 
       {/* Email */}
-      <Box sx={{ mb: 2 }}>
+      {/* <Box sx={{ mb: 2 }}>
         <FieldLabel>{ci.email}</FieldLabel>
         <TextField
           value={form.email}
@@ -468,6 +478,92 @@ function Step1({
           sx={S.textField}
           inputProps={{ style: { textAlign: isRtl ? "right" : "left" } }}
         />
+      </Box> */}
+      {/* Email */}
+      <Box sx={{ mb: 2 }}>
+        <FieldLabel>{ci.email}</FieldLabel>
+
+        <TextField
+          value={form.email}
+          onChange={onChange}
+          name="email"
+          type="email"
+          placeholder={ci.email}
+          size="small"
+          sx={S.textField}
+          inputProps={{ style: { textAlign: isRtl ? "right" : "left" } }}
+        />
+
+        {/* Email verification (OTP) */}
+        <Box sx={{ mt: 1 }}>
+          {form.otpVerified ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 0.5,
+                color: "#2e7d32",
+              }}
+            >
+              <CheckCircleOutlineIcon sx={{ fontSize: 18 }} />
+              <Typography sx={{ fontSize: "13px", fontWeight: "600" }}>
+                {ci.verified}
+              </Typography>
+            </Box>
+          ) : form.otpSent ? (
+            <Box
+              sx={{
+                display: "flex",
+                gap: 1,
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <TextField
+                value={form.otpCode}
+                onChange={onChange}
+                name="otpCode"
+                placeholder={ci.code_placeholder}
+                size="small"
+                sx={{ ...S.textField, maxWidth: "160px" }}
+                inputProps={{
+                  maxLength: 6,
+                  style: { textAlign: "center", letterSpacing: "2px" },
+                }}
+              />
+
+              <Button
+                size="small"
+                onClick={onVerifyCode}
+                disabled={isVerifyingOtp || !form.otpCode}
+                sx={{ ...S.changeBtn, minWidth: "76px" }}
+              >
+                {isVerifyingOtp ? ci.otp_verifying : ci.verify_code}
+              </Button>
+
+              <Typography
+                sx={{
+                  fontSize: "12px",
+                  color: ORANGE,
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
+                onClick={onSendCode}
+              >
+                {ci.resend_code}
+              </Typography>
+            </Box>
+          ) : (
+            <Button
+              size="small"
+              onClick={onSendCode}
+              disabled={isSendingOtp || !form.email}
+              sx={{ ...S.changeBtn, minWidth: "100px" }}
+            >
+              {isSendingOtp ? ci.otp_sending : ci.send_code}
+            </Button>
+          )}
+        </Box>
       </Box>
 
       {/* Consent */}
@@ -548,7 +644,7 @@ function Step2({ form, onChange, onNext, onPrev }) {
           mb: 1,
         }}
       >
-         <Box>
+        <Box>
           <FieldLabel>{ci.car_price}</FieldLabel>
           <TextField
             value={form.carPrice}
@@ -604,32 +700,37 @@ function Step2({ form, onChange, onNext, onPrev }) {
                 )
               : 3525;
 
-          return  form.carPrice && form.downPayment && (
-            <Box
-              key={months}
-              sx={S.installmentCard(selected)}
-              onClick={() =>
-                onChange({ target: { name: "selectedMonths", value: months } })
-              }
-            >
-              <Radio
-                checked={selected}
-                sx={{
-                  color: "#ccc",
-                  "&.Mui-checked": { color: ORANGE },
-                  p: 0.5,
-                }}
-                onChange={() => {}}
-              />
-              <Box sx={{ flex: 1, textAlign: 'start' }}>
-                <Typography sx={S.installmentMonths}>
-                  {months} {ci.months}
-                </Typography>
-                <Typography sx={S.installmentAmount}>
-                  {monthly.toLocaleString("en-US")} {ci.per_month}
-                </Typography>
+          return (
+            form.carPrice &&
+            form.downPayment && (
+              <Box
+                key={months}
+                sx={S.installmentCard(selected)}
+                onClick={() =>
+                  onChange({
+                    target: { name: "selectedMonths", value: months },
+                  })
+                }
+              >
+                <Radio
+                  checked={selected}
+                  sx={{
+                    color: "#ccc",
+                    "&.Mui-checked": { color: ORANGE },
+                    p: 0.5,
+                  }}
+                  onChange={() => {}}
+                />
+                <Box sx={{ flex: 1, textAlign: "start" }}>
+                  <Typography sx={S.installmentMonths}>
+                    {months} {ci.months}
+                  </Typography>
+                  <Typography sx={S.installmentAmount}>
+                    {monthly.toLocaleString("en-US")} {ci.per_month}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
+            )
           );
         })}
       </Box>
@@ -955,20 +1056,70 @@ export default function CarInstallmentPage() {
     theme: "colored",
   };
 
+  // const handleSendCode = useCallback(async () => {
+  //   if (!form.phone) {
+  //     toast.error(ci.otp_enter_phone_first, toastOpts);
+  //     return;
+  //   }
+  //   setIsSendingOtp(true);
+  //   try {
+  //     await api.post("/auth/send-otp", { phone: "+20" + form.phone });
+  //     setForm((prev) => ({
+  //       ...prev,
+  //       otpSent: true,
+  //       otpVerified: false,
+  //       otpCode: "",
+  //     }));
+  //     toast.success(ci.otp_sent_success, toastOpts);
+  //   } catch {
+  //     toast.error(ci.otp_sent_error, toastOpts);
+  //   } finally {
+  //     setIsSendingOtp(false);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [form.phone, ci]);
+
+  // const handleVerifyCode = useCallback(async () => {
+  //   setIsVerifyingOtp(true);
+  //   try {
+  //     const res = await api.post("/auth/verify-otp", {
+  //       phone: "+20" + form.phone,
+  //       code: form.otpCode,
+  //     });
+  //     if (res.data?.verified) {
+  //       setForm((prev) => ({ ...prev, otpVerified: true }));
+  //       toast.success(ci.otp_verified_success, toastOpts);
+  //     } else {
+  //       toast.error(ci.otp_invalid, toastOpts);
+  //     }
+  //   } catch {
+  //     toast.error(ci.otp_invalid, toastOpts);
+  //   } finally {
+  //     setIsVerifyingOtp(false);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [form.phone, form.otpCode, ci]);
+
   const handleSendCode = useCallback(async () => {
-    if (!form.phone) {
-      toast.error(ci.otp_enter_phone_first, toastOpts);
+    if (!form.email) {
+      toast.error(ci.otp_enter_email_first, toastOpts);
       return;
     }
+
     setIsSendingOtp(true);
+
     try {
-      await api.post("/auth/send-otp", { phone: "+20" + form.phone });
+      await api.post("/auth/send-otp", {
+        email: form.email,
+      });
+
       setForm((prev) => ({
         ...prev,
         otpSent: true,
         otpVerified: false,
         otpCode: "",
       }));
+
       toast.success(ci.otp_sent_success, toastOpts);
     } catch {
       toast.error(ci.otp_sent_error, toastOpts);
@@ -976,17 +1127,23 @@ export default function CarInstallmentPage() {
       setIsSendingOtp(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form.phone, ci]);
+  }, [form.email, ci]);
 
   const handleVerifyCode = useCallback(async () => {
     setIsVerifyingOtp(true);
+
     try {
       const res = await api.post("/auth/verify-otp", {
-        phone: "+20" + form.phone,
+        email: form.email,
         code: form.otpCode,
       });
+
       if (res.data?.verified) {
-        setForm((prev) => ({ ...prev, otpVerified: true }));
+        setForm((prev) => ({
+          ...prev,
+          otpVerified: true,
+        }));
+
         toast.success(ci.otp_verified_success, toastOpts);
       } else {
         toast.error(ci.otp_invalid, toastOpts);
@@ -997,7 +1154,7 @@ export default function CarInstallmentPage() {
       setIsVerifyingOtp(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form.phone, form.otpCode, ci]);
+  }, [form.email, form.otpCode, ci]);
 
   const handleRecaptchaChange = useCallback((token) => {
     setForm((prev) => ({ ...prev, recaptchaToken: token || null }));
