@@ -252,7 +252,7 @@ export const ciStyles = {
   consentRow: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
     gap: 1,
     my: 2,
     cursor: "pointer",

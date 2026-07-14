@@ -571,19 +571,19 @@ function Step1({
           onChange({ target: { name: "consent", value: !form.consent } })
         }
       >
-        <Typography sx={S.consentText}>{ci.credit_inquiry_consent}</Typography>
         <Checkbox
           checked={form.consent}
           sx={{ color: "#ccc", "&.Mui-checked": { color: ORANGE }, p: 0.5 }}
           onChange={() => {}}
         />
+        <Typography sx={S.consentText}>{ci.credit_inquiry_consent}</Typography>
       </Box>
 
       {/* reCAPTCHA */}
       <Box
         sx={{
           display: "flex",
-          justifyContent: isRtl ? "flex-end" : "flex-start",
+          justifyContent: "flex-start",
           my: 2,
         }}
       >
